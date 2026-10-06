@@ -1,0 +1,211 @@
+{
+  "info": {
+    "_postman_id": "6015f58e-c862-47ae-b5c3-611af0bc55cf",
+    "name": "Reto-FitZone",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53087252",
+    "_collection_link": "https://go.postman.co/collection/53087252-6015f58e-c862-47ae-b5c3-611af0bc55cf?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "02-CRUD-Encadenado",
+      "item": [
+        {
+          "name": "POST - Crear socio",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"La creación del socio responde con código 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"El socio creado tiene un ID\", function () {\r\n    const socio = pm.response.json();\r\n    pm.expect(socio.id).to.exist;\r\n});\r\n\r\npm.collectionVariables.set(\"socioId\", pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"{{nombre}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"plan\": \"{{plan}}\",\r\n  \"activo\": {{activo}},\r\n  \"edad\": {{edad}}\r\n}   ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/socios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "socios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar socio creado",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/socios/{{socioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "socios",
+                "{{socioId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear clase",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clases",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clases"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "01-DataDriven",
+      "item": [
+        {
+          "name": "POST Crear socio desde CSV",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const socio = pm.response.json();\r\n\r\nconst planValido = [\"BASICO\", \"PLUS\", \"PREMIUM\"];\r\nconst edadValida = socio.edad >= 16 && socio.edad <= 90;\r\nconst emailValido = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(socio.email);\r\n\r\nconst esperadoValido =\r\n    String(pm.iterationData.get(\"valido\")).toLowerCase() === \"true\";\r\n\r\nconst datosSonValidos =\r\n    planValido.includes(socio.plan) &&\r\n    edadValida &&\r\n    emailValido;\r\n\r\npm.test(\"La API responde con código 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"La validez de los datos coincide con el CSV\", function () {\r\n    pm.expect(datosSonValidos).to.eql(esperadoValido);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"{{nombre}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"plan\": \"{{plan}}\",\r\n  \"activo\": {{activo}},\r\n  \"edad\": {{edad}}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/socios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "socios"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "GET - Listar socios",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API responde con código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/socios",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "socios"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET - Buscar socio por ID",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const ids = [1, 2, 3];\r\n\r\npm.environment.set(\r\n    \"idSocio\",\r\n    ids[pm.info.iteration]\r\n);"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"La API responde con código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"El ID del socio corresponde al solicitado\", function () {\r\n    const socio = pm.response.json();\r\n    const idEsperado = Number(pm.environment.get(\"idSocio\"));\r\n\r\n    pm.expect(socio.id).to.eql(idEsperado);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/socios/{{idSocio}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "socios",
+            "{{idSocio}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "socioId",
+      "value": ""
+    }
+  ]
+}

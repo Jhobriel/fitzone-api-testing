@@ -1,0 +1,78 @@
+@mock_url = https://35f3e81d-bd88-4029-b768-fe77c99e6ff8.mock.pstmn.io
+
+### 1. Listar clases
+GET {{mock_url}}/clases
+
+### 2. Buscar clase por ID
+GET {{mock_url}}/clases/1
+
+### 3. Crear clase
+POST {{mock_url}}/clases
+Content-Type: application/json
+
+{
+  "nombre": "Pilates",
+  "instructor": "Ana Martinez",
+  "cupoMaximo": 15,
+  "duracionMin": 60
+}
+
+### 4. Reemplazar clase
+PUT {{mock_url}}/clases/1
+Content-Type: application/json
+
+{
+  "nombre": "Spinning Avanzado",
+  "instructor": "Carlos",
+  "cupoMaximo": 25,
+  "duracionMin": 75
+}
+
+### 5. Modificar clase
+PATCH {{mock_url}}/clases/1
+Content-Type: application/json
+
+{
+  "cupoMaximo": 30
+}
+
+### 6. Borrar clase
+DELETE {{mock_url}}/clases/1
+
+###
+
+### 7. Listar clases nuevamente
+GET {{mock_url}}/clases
+
+###
+
+### 8. Buscar otra vez clase por ID
+GET {{mock_url}}/clases/1
+
+###
+
+### 9. Crear otra clase
+POST {{mock_url}}/clases
+Content-Type: application/json
+
+{
+  "nombre": "Yoga",
+  "instructor": "Valentina Cruz",
+  "cupoMaximo": 15,
+  "duracionMin": 60
+}
+
+###
+
+### 10. Modificar cupo de clase
+PATCH {{mock_url}}/clases/1
+Content-Type: application/json
+
+{
+  "cupoMaximo": 25
+}
+
+###
+
+### Utilidad del Mock
+Un Mock permite probar y validar las solicitudes de una API cuando el backend real aún no está disponible.

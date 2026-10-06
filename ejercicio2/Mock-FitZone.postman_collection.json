@@ -1,0 +1,1143 @@
+{
+  "info": {
+    "_postman_id": "6015f58e-c862-47ae-b5c3-611af0bc55cf",
+    "name": "Reto-FitZone",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53087252",
+    "_collection_link": "https://go.postman.co/collection/53087252-6015f58e-c862-47ae-b5c3-611af0bc55cf?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "01-DataDriven",
+      "item": [
+        {
+          "name": "POST Crear socio desde CSV",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const socio = pm.response.json();\r\n\r\nconst planValido = [\"BASICO\", \"PLUS\", \"PREMIUM\"];\r\nconst edadValida = socio.edad >= 16 && socio.edad <= 90;\r\nconst emailValido = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(socio.email);\r\n\r\nconst esperadoValido =\r\n    String(pm.iterationData.get(\"valido\")).toLowerCase() === \"true\";\r\n\r\nconst datosSonValidos =\r\n    planValido.includes(socio.plan) &&\r\n    edadValida &&\r\n    emailValido;\r\n\r\npm.test(\"La API responde con código 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"La validez de los datos coincide con el CSV\", function () {\r\n    pm.expect(datosSonValidos).to.eql(esperadoValido);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"{{nombre}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"plan\": \"{{plan}}\",\r\n  \"activo\": {{activo}},\r\n  \"edad\": {{edad}}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/socios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "socios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar socios",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"La API responde con código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/socios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "socios"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02-CRUD-Encadenado",
+      "item": [
+        {
+          "name": "POST - Crear socio",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"La creación del socio responde con código 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"El socio creado tiene un ID\", function () {\r\n    const socio = pm.response.json();\r\n    pm.expect(socio.id).to.exist;\r\n});\r\n\r\npm.collectionVariables.set(\"socioId\", pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"{{nombre}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"plan\": \"{{plan}}\",\r\n  \"activo\": {{activo}},\r\n  \"edad\": {{edad}}\r\n}   ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/socios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "socios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar socio creado",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"El GET responde con código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"El ID corresponde al socio creado\", function () {\r\n    const socio = pm.response.json();\r\n    const socioId = pm.collectionVariables.get(\"socioId\");\r\n\r\n    pm.expect(socio.id).to.eql(Number(socioId));\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/socios/{{socioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "socios",
+                "{{socioId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Crear clase",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"La creación de la clase responde con código 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"La clase creada tiene un ID\", function () {\r\n    const clase = pm.response.json();\r\n    pm.expect(clase.id).to.exist;\r\n});\r\n\r\npm.collectionVariables.set(\"claseId\", pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"Spinning\",\r\n  \"instructor\": \"Carlos\",\r\n  \"cupoMaximo\": 20,\r\n  \"duracionMin\": 60\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clases",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clases"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "POST - Crear clase",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"nombre\": \"Spinning\",\r\n  \"instructor\": \"Carlos\",\r\n  \"cupoMaximo\": 20,\r\n  \"duracionMin\": 60\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/clases",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clases"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "x-powered-by",
+                  "value": "Express"
+                },
+                {
+                  "key": "vary",
+                  "value": "Origin, X-HTTP-Method-Override, Accept-Encoding"
+                },
+                {
+                  "key": "access-control-allow-credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "expires",
+                  "value": "-1"
+                },
+                {
+                  "key": "access-control-expose-headers",
+                  "value": "Location"
+                },
+                {
+                  "key": "location",
+                  "value": "http://localhost:3000/clases/42"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "content-length",
+                  "value": "105"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"69-Y6ILYrqL/gEQtkGTls4vWK4fjBs\""
+                },
+                {
+                  "key": "date",
+                  "value": "Mon, 05 Oct 2026 03:56:18 GMT"
+                },
+                {
+                  "key": "connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "keep-alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"nombre\": \"Spinning\",\n  \"instructor\": \"Carlos\",\n  \"cupoMaximo\": 20,\n  \"duracionMin\": 60,\n  \"id\": 42\n}"
+            }
+          ]
+        },
+        {
+          "name": "POST - Crear reserva",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"La reserva responde con código 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"La reserva creada tiene un ID\", function () {\r\n    const reserva = pm.response.json();\r\n    pm.expect(reserva.id).to.exist;\r\n});\r\n\r\npm.test(\"La reserva usa el socio creado\", function () {\r\n    const reserva = pm.response.json();\r\n    const socioId = pm.collectionVariables.get(\"socioId\");\r\n\r\n    pm.expect(reserva.socioId).to.eql(Number(socioId));\r\n});\r\n\r\npm.test(\"La reserva usa la clase creada\", function () {\r\n    const reserva = pm.response.json();\r\n    const claseId = pm.collectionVariables.get(\"claseId\");\r\n\r\n    pm.expect(reserva.claseId).to.eql(Number(claseId));\r\n});\r\n\r\npm.collectionVariables.set(\r\n    \"reservaId\",\r\n    pm.response.json().id\r\n);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"socioId\": {{socioId}},\r\n  \"claseId\": {{claseId}},\r\n  \"fecha\": \"2026-10-05\",\r\n  \"estado\": \"CONFIRMADA\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reservas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reservas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar reserva creada",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"La reserva responde con código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La reserva corresponde al socio creado\", function () {\r\n    const reserva = pm.response.json();\r\n    const socioId = pm.collectionVariables.get(\"socioId\");\r\n\r\n    pm.expect(reserva.socioId).to.eql(Number(socioId));\r\n});\r\n\r\npm.test(\"La reserva corresponde a la clase creada\", function () {\r\n    const reserva = pm.response.json();\r\n    const claseId = pm.collectionVariables.get(\"claseId\");\r\n\r\n    pm.expect(reserva.claseId).to.eql(Number(claseId));\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reservas/{{reservaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reservas",
+                "{{reservaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Actualizar reserva",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"La reserva se actualiza con código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La reserva conserva el socio creado\", function () {\r\n    const reserva = pm.response.json();\r\n    const socioId = pm.collectionVariables.get(\"socioId\");\r\n\r\n    pm.expect(reserva.socioId).to.eql(Number(socioId));\r\n});\r\n\r\npm.test(\"La reserva conserva la clase creada\", function () {\r\n    const reserva = pm.response.json();\r\n    const claseId = pm.collectionVariables.get(\"claseId\");\r\n\r\n    pm.expect(reserva.claseId).to.eql(Number(claseId));\r\n});\r\n\r\npm.test(\"La fecha de la reserva fue actualizada\", function () {\r\n    const reserva = pm.response.json();\r\n\r\n    pm.expect(reserva.fecha).to.eql(\"2026-10-06\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"socioId\": {{socioId}},\r\n  \"claseId\": {{claseId}},\r\n  \"fecha\": \"2026-10-06\",\r\n  \"estado\": \"CONFIRMADA\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reservas/{{reservaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reservas",
+                "{{reservaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH - Actualizar estado reserva",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"La reserva se actualiza correctamente\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"El estado de la reserva queda CANCELADA\", function () {\r\n    const reserva = pm.response.json();\r\n    pm.expect(reserva.estado).to.eql(\"CANCELADA\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"estado\": \"CANCELADA\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reservas/{{reservaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reservas",
+                "{{reservaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Eliminar reserva",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"La reserva se elimina con código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reservas/{{reservaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reservas",
+                "{{reservaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Verificar reserva eliminada",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"La reserva eliminada responde con código 404\", function () {\r\n    pm.response.to.have.status(404);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reservas/{{reservaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reservas",
+                "{{reservaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar clases",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clases",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clases"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "GET - Listar clases",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/clases",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clases"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "x-powered-by",
+                  "value": "Express"
+                },
+                {
+                  "key": "vary",
+                  "value": "Origin, Accept-Encoding"
+                },
+                {
+                  "key": "access-control-allow-credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "expires",
+                  "value": "-1"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"586-24PjGLGtog9ZElvHZobTlXTpncU\""
+                },
+                {
+                  "key": "content-encoding",
+                  "value": "br"
+                },
+                {
+                  "key": "date",
+                  "value": "Mon, 05 Oct 2026 03:50:58 GMT"
+                },
+                {
+                  "key": "connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "keep-alive",
+                  "value": "timeout=5"
+                },
+                {
+                  "key": "transfer-encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"id\": 1,\n    \"nombre\": \"Spinning\",\n    \"instructor\": \"Sofia Herrera\",\n    \"cupoMaximo\": 20,\n    \"duracionMin\": 60\n  },\n  {\n    \"id\": 2,\n    \"nombre\": \"Yoga\",\n    \"instructor\": \"Valentina Cruz\",\n    \"cupoMaximo\": 15,\n    \"duracionMin\": 60\n  },\n  {\n    \"id\": 3,\n    \"nombre\": \"CrossFit\",\n    \"instructor\": \"Miguel Castro\",\n    \"cupoMaximo\": 12,\n    \"duracionMin\": 90\n  },\n  {\n    \"id\": 4,\n    \"nombre\": \"Pilates\",\n    \"instructor\": \"Camila Moreno\",\n    \"cupoMaximo\": 18,\n    \"duracionMin\": 45\n  },\n  {\n    \"id\": 5\n  },\n  {\n    \"id\": 6\n  },\n  {\n    \"id\": 7\n  },\n  {\n    \"id\": 8\n  },\n  {\n    \"id\": 9\n  },\n  {\n    \"id\": 10\n  },\n  {\n    \"id\": 11\n  },\n  {\n    \"id\": 12\n  },\n  {\n    \"id\": 13\n  },\n  {\n    \"id\": 14\n  },\n  {\n    \"id\": 15\n  },\n  {\n    \"id\": 16\n  },\n  {\n    \"id\": 17\n  },\n  {\n    \"id\": 18\n  },\n  {\n    \"id\": 19\n  },\n  {\n    \"id\": 20\n  },\n  {\n    \"id\": 21\n  },\n  {\n    \"id\": 22\n  },\n  {\n    \"id\": 23\n  },\n  {\n    \"id\": 24\n  },\n  {\n    \"id\": 25\n  },\n  {\n    \"id\": 26\n  },\n  {\n    \"id\": 27\n  },\n  {\n    \"id\": 28\n  },\n  {\n    \"id\": 29\n  },\n  {\n    \"id\": 30\n  },\n  {\n    \"id\": 31\n  },\n  {\n    \"id\": 32\n  },\n  {\n    \"id\": 33\n  },\n  {\n    \"id\": 34\n  },\n  {\n    \"id\": 35\n  },\n  {\n    \"id\": 36\n  },\n  {\n    \"id\": 37\n  },\n  {\n    \"id\": 38\n  },\n  {\n    \"id\": 39\n  },\n  {\n    \"id\": 40\n  },\n  {\n    \"nombre\": \"Spinning\",\n    \"instructor\": \"Carlos\",\n    \"cupoMaximo\": 20,\n    \"duracionMin\": 60,\n    \"id\": 41\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "GET - Buscar clase por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clases/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clases",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "GET - Buscar clase por ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/clases/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clases",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "x-powered-by",
+                  "value": "Express"
+                },
+                {
+                  "key": "vary",
+                  "value": "Origin, Accept-Encoding"
+                },
+                {
+                  "key": "access-control-allow-credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "expires",
+                  "value": "-1"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "content-length",
+                  "value": "111"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"6f-N3mAaTSJTH2Q6zKuDDny+hPtQmQ\""
+                },
+                {
+                  "key": "date",
+                  "value": "Mon, 05 Oct 2026 03:55:06 GMT"
+                },
+                {
+                  "key": "connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "keep-alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"id\": 1,\n  \"nombre\": \"Spinning\",\n  \"instructor\": \"Sofia Herrera\",\n  \"cupoMaximo\": 20,\n  \"duracionMin\": 60\n}"
+            }
+          ]
+        },
+        {
+          "name": "PUT - Actualizar clase",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"Spinning Avanzado\",\r\n  \"instructor\": \"Carlos\",\r\n  \"cupoMaximo\": 25,\r\n  \"duracionMin\": 75\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clases/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clases",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "PUT - Actualizar clase",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"nombre\": \"Spinning Avanzado\",\r\n  \"instructor\": \"Carlos\",\r\n  \"cupoMaximo\": 25,\r\n  \"duracionMin\": 75\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/clases/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clases",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "x-powered-by",
+                  "value": "Express"
+                },
+                {
+                  "key": "vary",
+                  "value": "Origin, Accept-Encoding"
+                },
+                {
+                  "key": "access-control-allow-credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "expires",
+                  "value": "-1"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "content-length",
+                  "value": "113"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"71-eHi6K+ns8+aeRcrwEHZpiHg7rAE\""
+                },
+                {
+                  "key": "date",
+                  "value": "Mon, 05 Oct 2026 03:59:01 GMT"
+                },
+                {
+                  "key": "connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "keep-alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"nombre\": \"Spinning Avanzado\",\n  \"instructor\": \"Carlos\",\n  \"cupoMaximo\": 25,\n  \"duracionMin\": 75,\n  \"id\": 1\n}"
+            }
+          ]
+        },
+        {
+          "name": "PATCH - Actualizar clase",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"cupoMaximo\": 30\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clases/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clases",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "PATCH - Actualizar clase",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"cupoMaximo\": 30\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/clases/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clases",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "x-powered-by",
+                  "value": "Express"
+                },
+                {
+                  "key": "vary",
+                  "value": "Origin, Accept-Encoding"
+                },
+                {
+                  "key": "access-control-allow-credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "expires",
+                  "value": "-1"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "content-length",
+                  "value": "113"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"71-M/Fc5DSdK07zzxzJfNdmJHo5iYY\""
+                },
+                {
+                  "key": "date",
+                  "value": "Mon, 05 Oct 2026 04:00:43 GMT"
+                },
+                {
+                  "key": "connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "keep-alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"nombre\": \"Spinning Avanzado\",\n  \"instructor\": \"Carlos\",\n  \"cupoMaximo\": 30,\n  \"duracionMin\": 75,\n  \"id\": 1\n}"
+            }
+          ]
+        },
+        {
+          "name": "DELETE - Eliminar clase",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/clases/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clases",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "DELETE - Eliminar clase",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/clases/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clases",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "x-powered-by",
+                  "value": "Express"
+                },
+                {
+                  "key": "vary",
+                  "value": "Origin, Accept-Encoding"
+                },
+                {
+                  "key": "access-control-allow-credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "pragma",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "expires",
+                  "value": "-1"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "content-length",
+                  "value": "2"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+                },
+                {
+                  "key": "date",
+                  "value": "Mon, 05 Oct 2026 04:03:02 GMT"
+                },
+                {
+                  "key": "connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "keep-alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "03-Consultas",
+      "item": [
+        {
+          "name": "GET - Listar socios",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"La consulta de socios responde con código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La respuesta contiene una lista de socios\", function () {\r\n    const socios = pm.response.json();\r\n\r\n    pm.expect(socios).to.be.an(\"array\");\r\n});\r\n\r\npm.test(\"La lista de socios contiene registros\", function () {\r\n    const socios = pm.response.json();\r\n\r\n    pm.expect(socios.length).to.be.greaterThan(0);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/socios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "socios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Buscar socio por ID",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const ids = [1, 2, 3];\r\n\r\npm.environment.set(\r\n    \"idSocio\",\r\n    ids[pm.info.iteration]\r\n);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"La API responde con código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"El ID del socio corresponde al solicitado\", function () {\r\n    const socio = pm.response.json();\r\n    const idEsperado = Number(pm.environment.get(\"idSocio\"));\r\n\r\n    pm.expect(socio.id).to.eql(idEsperado);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/socios/{{idSocio}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "socios",
+                "{{idSocio}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Listar socios por plan PLUS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const socios = pm.response.json();\r\n\r\npm.test(\"La consulta filtrada responde con código 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Todos los socios pertenecen al plan PLUS\", function () {\r\n    pm.expect(socios).to.be.an(\"array\");\r\n\r\n    socios.forEach(function (socio) {\r\n        pm.expect(socio.plan).to.eql(\"PLUS\");\r\n    });\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/socios?plan=PLUS",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "socios"
+              ],
+              "query": [
+                {
+                  "key": "plan",
+                  "value": "PLUS"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "socioId",
+      "value": ""
+    },
+    {
+      "key": "claseId",
+      "value": ""
+    },
+    {
+      "key": "reservaId",
+      "value": ""
+    }
+  ]
+}

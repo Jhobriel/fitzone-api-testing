@@ -1,0 +1,925 @@
+{
+  "socios": [
+    {
+      "id": 1,
+      "nombre": "Carlos Ramirez",
+      "email": "carlos.ramirez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 32
+    },
+    {
+      "id": 2,
+      "nombre": "Laura Gomez",
+      "email": "laura.gomez@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 27
+    },
+    {
+      "id": 3,
+      "nombre": "Andres Torres",
+      "email": "andres.torres@gmail.com",
+      "plan": "BASICO",
+      "activo": true,
+      "edad": 41
+    },
+    {
+      "id": 4,
+      "nombre": "Maria Rodriguez",
+      "email": "maria.rodriguez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": false,
+      "edad": 35
+    },
+    {
+      "id": 5,
+      "nombre": "Daniel Martinez",
+      "email": "daniel.martinez@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 22
+    },
+    {
+      "nombre": "Socio CRUD",
+      "email": "socio.crud@gmail.com",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 30,
+      "id": 6
+    },
+    {
+      "nombre": "Carlos Perez",
+      "email": "carlos.perez@gmail.com",
+      "plan": "BASIC",
+      "activo": true,
+      "edad": 25,
+      "id": 7
+    },
+    {
+      "nombre": "Laura Gomez",
+      "email": "laura.gomez@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 27,
+      "id": 8
+    },
+    {
+      "nombre": "Andres Rodriguez",
+      "email": "andres.rodriguez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 30,
+      "id": 9
+    },
+    {
+      "nombre": "Maria Lopez",
+      "email": "maria.lopez@gmail.com",
+      "plan": "BASIC",
+      "activo": false,
+      "edad": 22,
+      "id": 10
+    },
+    {
+      "nombre": "Juan Torres",
+      "email": "juan.torres@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 40,
+      "id": 11
+    },
+    {
+      "nombre": "Sofia Martinez",
+      "email": "sofia.martinez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": false,
+      "edad": 35,
+      "id": 12
+    },
+    {
+      "nombre": "Pedro Invalid",
+      "email": "pedro.invalid@gmail.com",
+      "plan": "ORO",
+      "activo": true,
+      "edad": 30,
+      "id": 13
+    },
+    {
+      "nombre": "Ana Edad",
+      "email": "ana.edad@gmail.com",
+      "plan": "BASIC",
+      "activo": true,
+      "edad": 10,
+      "id": 14
+    },
+    {
+      "nombre": "Luis Edad",
+      "email": "luis.edad@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 100,
+      "id": 15
+    },
+    {
+      "nombre": "Email Invalido",
+      "email": "luisinvalido",
+      "plan": "BASIC",
+      "activo": true,
+      "edad": 25,
+      "id": 16
+    },
+    {
+      "nombre": "Plan Invalido",
+      "email": "plan.invalido@gmail.com",
+      "plan": "VIP",
+      "activo": true,
+      "edad": 28,
+      "id": 17
+    },
+    {
+      "nombre": "Email Vacio",
+      "email": "",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 32,
+      "id": 18
+    },
+    {
+      "nombre": "Carlos Perez",
+      "email": "carlos.perez@gmail.com",
+      "plan": "BASIC",
+      "activo": true,
+      "edad": 25,
+      "id": 19
+    },
+    {
+      "nombre": "Laura Gomez",
+      "email": "laura.gomez@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 27,
+      "id": 20
+    },
+    {
+      "nombre": "Andres Rodriguez",
+      "email": "andres.rodriguez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 30,
+      "id": 21
+    },
+    {
+      "nombre": "Maria Lopez",
+      "email": "maria.lopez@gmail.com",
+      "plan": "BASIC",
+      "activo": false,
+      "edad": 22,
+      "id": 22
+    },
+    {
+      "nombre": "Juan Torres",
+      "email": "juan.torres@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 40,
+      "id": 23
+    },
+    {
+      "nombre": "Sofia Martinez",
+      "email": "sofia.martinez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": false,
+      "edad": 35,
+      "id": 24
+    },
+    {
+      "nombre": "Pedro Invalid",
+      "email": "pedro.invalid@gmail.com",
+      "plan": "ORO",
+      "activo": true,
+      "edad": 30,
+      "id": 25
+    },
+    {
+      "nombre": "Ana Edad",
+      "email": "ana.edad@gmail.com",
+      "plan": "BASIC",
+      "activo": true,
+      "edad": 10,
+      "id": 26
+    },
+    {
+      "nombre": "Luis Edad",
+      "email": "luis.edad@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 100,
+      "id": 27
+    },
+    {
+      "nombre": "Email Invalido",
+      "email": "luisinvalido",
+      "plan": "BASIC",
+      "activo": true,
+      "edad": 25,
+      "id": 28
+    },
+    {
+      "nombre": "Plan Invalido",
+      "email": "plan.invalido@gmail.com",
+      "plan": "VIP",
+      "activo": true,
+      "edad": 28,
+      "id": 29
+    },
+    {
+      "nombre": "Email Vacio",
+      "email": "",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 32,
+      "id": 30
+    },
+    {
+      "nombre": "Carlos Perez",
+      "email": "carlos.perez@gmail.com",
+      "plan": "BASIC",
+      "activo": true,
+      "edad": 25,
+      "id": 31
+    },
+    {
+      "nombre": "Carlos Perez",
+      "email": "carlos.perez@gmail.com",
+      "plan": "BASIC",
+      "activo": true,
+      "edad": 25,
+      "id": 32
+    },
+    {
+      "nombre": "Laura Gomez",
+      "email": "laura.gomez@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 27,
+      "id": 33
+    },
+    {
+      "nombre": "Laura Gomez",
+      "email": "laura.gomez@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 27,
+      "id": 34
+    },
+    {
+      "nombre": "Andres Rodriguez",
+      "email": "andres.rodriguez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 30,
+      "id": 35
+    },
+    {
+      "nombre": "Andres Rodriguez",
+      "email": "andres.rodriguez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 30,
+      "id": 36
+    },
+    {
+      "nombre": "Maria Lopez",
+      "email": "maria.lopez@gmail.com",
+      "plan": "BASIC",
+      "activo": false,
+      "edad": 22,
+      "id": 37
+    },
+    {
+      "nombre": "Maria Lopez",
+      "email": "maria.lopez@gmail.com",
+      "plan": "BASIC",
+      "activo": false,
+      "edad": 22,
+      "id": 38
+    },
+    {
+      "nombre": "Juan Torres",
+      "email": "juan.torres@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 40,
+      "id": 39
+    },
+    {
+      "nombre": "Juan Torres",
+      "email": "juan.torres@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 40,
+      "id": 40
+    },
+    {
+      "nombre": "Sofia Martinez",
+      "email": "sofia.martinez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": false,
+      "edad": 35,
+      "id": 41
+    },
+    {
+      "nombre": "Sofia Martinez",
+      "email": "sofia.martinez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": false,
+      "edad": 35,
+      "id": 42
+    },
+    {
+      "nombre": "Pedro Invalid",
+      "email": "pedro.invalid@gmail.com",
+      "plan": "ORO",
+      "activo": true,
+      "edad": 30,
+      "id": 43
+    },
+    {
+      "nombre": "Pedro Invalid",
+      "email": "pedro.invalid@gmail.com",
+      "plan": "ORO",
+      "activo": true,
+      "edad": 30,
+      "id": 44
+    },
+    {
+      "nombre": "Ana Edad",
+      "email": "ana.edad@gmail.com",
+      "plan": "BASIC",
+      "activo": true,
+      "edad": 10,
+      "id": 45
+    },
+    {
+      "nombre": "Ana Edad",
+      "email": "ana.edad@gmail.com",
+      "plan": "BASIC",
+      "activo": true,
+      "edad": 10,
+      "id": 46
+    },
+    {
+      "nombre": "Luis Edad",
+      "email": "luis.edad@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 100,
+      "id": 47
+    },
+    {
+      "nombre": "Luis Edad",
+      "email": "luis.edad@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 100,
+      "id": 48
+    },
+    {
+      "nombre": "Email Invalido",
+      "email": "luisinvalido",
+      "plan": "BASIC",
+      "activo": true,
+      "edad": 25,
+      "id": 49
+    },
+    {
+      "nombre": "Email Invalido",
+      "email": "luisinvalido",
+      "plan": "BASIC",
+      "activo": true,
+      "edad": 25,
+      "id": 50
+    },
+    {
+      "nombre": "Plan Invalido",
+      "email": "plan.invalido@gmail.com",
+      "plan": "VIP",
+      "activo": true,
+      "edad": 28,
+      "id": 51
+    },
+    {
+      "nombre": "Plan Invalido",
+      "email": "plan.invalido@gmail.com",
+      "plan": "VIP",
+      "activo": true,
+      "edad": 28,
+      "id": 52
+    },
+    {
+      "nombre": "Email Vacio",
+      "email": "",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 32,
+      "id": 53
+    },
+    {
+      "nombre": "Email Vacio",
+      "email": "",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 32,
+      "id": 54
+    },
+    {
+      "nombre": "Carlos Perez",
+      "email": "carlos.perez@gmail.com",
+      "plan": "BASICO",
+      "activo": true,
+      "edad": 25,
+      "id": 55
+    },
+    {
+      "nombre": "Laura Gomez",
+      "email": "laura.gomez@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 27,
+      "id": 56
+    },
+    {
+      "nombre": "Andres Rodriguez",
+      "email": "andres.rodriguez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 30,
+      "id": 57
+    },
+    {
+      "nombre": "Maria Lopez",
+      "email": "maria.lopez@gmail.com",
+      "plan": "BASICO",
+      "activo": false,
+      "edad": 22,
+      "id": 58
+    },
+    {
+      "nombre": "Juan Torres",
+      "email": "juan.torres@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 40,
+      "id": 59
+    },
+    {
+      "nombre": "Sofia Martinez",
+      "email": "sofia.martinez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": false,
+      "edad": 35,
+      "id": 60
+    },
+    {
+      "nombre": "Pedro Invalid",
+      "email": "pedro.invalid@gmail.com",
+      "plan": "ORO",
+      "activo": true,
+      "edad": 30,
+      "id": 61
+    },
+    {
+      "nombre": "Ana Edad",
+      "email": "ana.edad@gmail.com",
+      "plan": "BASICO",
+      "activo": true,
+      "edad": 10,
+      "id": 62
+    },
+    {
+      "nombre": "Luis Edad",
+      "email": "luis.edad@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 100,
+      "id": 63
+    },
+    {
+      "nombre": "Email Invalido",
+      "email": "luisinvalido",
+      "plan": "BASICO",
+      "activo": true,
+      "edad": 25,
+      "id": 64
+    },
+    {
+      "nombre": "Plan Invalido",
+      "email": "plan.invalido@gmail.com",
+      "plan": "VIP",
+      "activo": true,
+      "edad": 28,
+      "id": 65
+    },
+    {
+      "nombre": "Email Vacio",
+      "email": "",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 32,
+      "id": 66
+    },
+    {
+      "nombre": "Carlos Perez",
+      "email": "carlos.perez@gmail.com",
+      "plan": "BASICO",
+      "activo": true,
+      "edad": 25,
+      "id": 67
+    },
+    {
+      "nombre": "Laura Gomez",
+      "email": "laura.gomez@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 27,
+      "id": 68
+    },
+    {
+      "nombre": "Andres Rodriguez",
+      "email": "andres.rodriguez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 30,
+      "id": 69
+    },
+    {
+      "nombre": "Maria Lopez",
+      "email": "maria.lopez@gmail.com",
+      "plan": "BASICO",
+      "activo": false,
+      "edad": 22,
+      "id": 70
+    },
+    {
+      "nombre": "Juan Torres",
+      "email": "juan.torres@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 40,
+      "id": 71
+    },
+    {
+      "nombre": "Sofia Martinez",
+      "email": "sofia.martinez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": false,
+      "edad": 35,
+      "id": 72
+    },
+    {
+      "nombre": "Pedro Invalid",
+      "email": "pedro.invalid@gmail.com",
+      "plan": "ORO",
+      "activo": true,
+      "edad": 30,
+      "id": 73
+    },
+    {
+      "nombre": "Ana Edad",
+      "email": "ana.edad@gmail.com",
+      "plan": "BASICO",
+      "activo": true,
+      "edad": 10,
+      "id": 74
+    },
+    {
+      "nombre": "Luis Edad",
+      "email": "luis.edad@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 100,
+      "id": 75
+    },
+    {
+      "nombre": "Email Invalido",
+      "email": "luisinvalido",
+      "plan": "BASICO",
+      "activo": true,
+      "edad": 25,
+      "id": 76
+    },
+    {
+      "nombre": "Plan Invalido",
+      "email": "plan.invalido@gmail.com",
+      "plan": "VIP",
+      "activo": true,
+      "edad": 28,
+      "id": 77
+    },
+    {
+      "nombre": "Email Vacio",
+      "email": "",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 32,
+      "id": 78
+    },
+    {
+      "nombre": "Carlos Perez",
+      "email": "carlos.perez@gmail.com",
+      "plan": "BASICO",
+      "activo": true,
+      "edad": 25,
+      "id": 79
+    },
+    {
+      "nombre": "Laura Gomez",
+      "email": "laura.gomez@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 27,
+      "id": 80
+    },
+    {
+      "nombre": "Andres Rodriguez",
+      "email": "andres.rodriguez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 30,
+      "id": 81
+    },
+    {
+      "nombre": "Maria Lopez",
+      "email": "maria.lopez@gmail.com",
+      "plan": "BASICO",
+      "activo": false,
+      "edad": 22,
+      "id": 82
+    },
+    {
+      "nombre": "Juan Torres",
+      "email": "juan.torres@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 40,
+      "id": 83
+    },
+    {
+      "nombre": "Sofia Martinez",
+      "email": "sofia.martinez@gmail.com",
+      "plan": "PREMIUM",
+      "activo": false,
+      "edad": 35,
+      "id": 84
+    },
+    {
+      "nombre": "Pedro Invalid",
+      "email": "pedro.invalid@gmail.com",
+      "plan": "ORO",
+      "activo": true,
+      "edad": 30,
+      "id": 85
+    },
+    {
+      "nombre": "Ana Edad",
+      "email": "ana.edad@gmail.com",
+      "plan": "BASICO",
+      "activo": true,
+      "edad": 10,
+      "id": 86
+    },
+    {
+      "nombre": "Luis Edad",
+      "email": "luis.edad@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 100,
+      "id": 87
+    },
+    {
+      "nombre": "Email Invalido",
+      "email": "luisinvalido",
+      "plan": "BASICO",
+      "activo": true,
+      "edad": 25,
+      "id": 88
+    },
+    {
+      "nombre": "Plan Invalido",
+      "email": "plan.invalido@gmail.com",
+      "plan": "VIP",
+      "activo": true,
+      "edad": 28,
+      "id": 89
+    },
+    {
+      "nombre": "Email Vacio",
+      "email": "",
+      "plan": "PREMIUM",
+      "activo": true,
+      "edad": 32,
+      "id": 90
+    },
+    {
+      "nombre": "Jhoan QA",
+      "email": "jhoan.qa@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 30,
+      "id": 91
+    },
+    {
+      "nombre": "Jhoan QA",
+      "email": "jhoan.qa@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 30,
+      "id": 92
+    },
+    {
+      "nombre": "Jhoan QA",
+      "email": "jhoan.qa@gmail.com",
+      "plan": "PLUS",
+      "activo": true,
+      "edad": 30,
+      "id": 93
+    }
+  ],
+  "clases": [
+    {
+      "id": 2,
+      "nombre": "Yoga",
+      "instructor": "Valentina Cruz",
+      "cupoMaximo": 15,
+      "duracionMin": 60
+    },
+    {
+      "id": 3,
+      "nombre": "CrossFit",
+      "instructor": "Miguel Castro",
+      "cupoMaximo": 12,
+      "duracionMin": 90
+    },
+    {
+      "id": 4,
+      "nombre": "Pilates",
+      "instructor": "Camila Moreno",
+      "cupoMaximo": 18,
+      "duracionMin": 45
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
+    },
+    {
+      "id": 7
+    },
+    {
+      "id": 8
+    },
+    {
+      "id": 9
+    },
+    {
+      "id": 10
+    },
+    {
+      "id": 11
+    },
+    {
+      "id": 12
+    },
+    {
+      "id": 13
+    },
+    {
+      "id": 14
+    },
+    {
+      "id": 15
+    },
+    {
+      "id": 16
+    },
+    {
+      "id": 17
+    },
+    {
+      "id": 18
+    },
+    {
+      "id": 19
+    },
+    {
+      "id": 20
+    },
+    {
+      "id": 21
+    },
+    {
+      "id": 22
+    },
+    {
+      "id": 23
+    },
+    {
+      "id": 24
+    },
+    {
+      "id": 25
+    },
+    {
+      "id": 26
+    },
+    {
+      "id": 27
+    },
+    {
+      "id": 28
+    },
+    {
+      "id": 29
+    },
+    {
+      "id": 30
+    },
+    {
+      "id": 31
+    },
+    {
+      "id": 32
+    },
+    {
+      "id": 33
+    },
+    {
+      "id": 34
+    },
+    {
+      "id": 35
+    },
+    {
+      "id": 36
+    },
+    {
+      "id": 37
+    },
+    {
+      "id": 38
+    },
+    {
+      "id": 39
+    },
+    {
+      "id": 40
+    },
+    {
+      "nombre": "Spinning",
+      "instructor": "Carlos",
+      "cupoMaximo": 20,
+      "duracionMin": 60,
+      "id": 41
+    },
+    {
+      "nombre": "Spinning",
+      "instructor": "Carlos",
+      "cupoMaximo": 20,
+      "duracionMin": 60,
+      "id": 42
+    },
+    {
+      "nombre": "Spinning",
+      "instructor": "Carlos",
+      "cupoMaximo": 20,
+      "duracionMin": 60,
+      "id": 43
+    },
+    {
+      "id": 44
+    },
+    {
+      "id": 45
+    },
+    {
+      "id": 46
+    }
+  ],
+  "reservas": [
+    {
+      "id": 2,
+      "socioId": 2,
+      "claseId": 2,
+      "fecha": "2026-10-02",
+      "estado": "CONFIRMADA"
+    },
+    {
+      "id": 3,
+      "socioId": 3,
+      "claseId": 3,
+      "fecha": "2026-10-03",
+      "estado": "ASISTIO"
+    }
+  ]
+}

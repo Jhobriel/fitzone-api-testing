@@ -1,0 +1,13 @@
+nombre,email,plan,activo,edad,valido
+Carlos Perez,carlos.perez@gmail.com,BASICO,true,25,true
+Laura Gomez,laura.gomez@gmail.com,PLUS,true,27,true
+Andres Rodriguez,andres.rodriguez@gmail.com,PREMIUM,true,30,true
+Maria Lopez,maria.lopez@gmail.com,BASICO,false,22,true
+Juan Torres,juan.torres@gmail.com,PLUS,true,40,true
+Sofia Martinez,sofia.martinez@gmail.com,PREMIUM,false,35,true
+Pedro Invalid,pedro.invalid@gmail.com,ORO,true,30,false
+Ana Edad,ana.edad@gmail.com,BASICO,true,10,false
+Luis Edad,luis.edad@gmail.com,PLUS,true,100,false
+Email Invalido,luisinvalido,BASICO,true,25,false
+Plan Invalido,plan.invalido@gmail.com,VIP,true,28,false
+Email Vacio,,PREMIUM,true,32,false
